@@ -1,0 +1,1 @@
+insert into user(id,name,avatar,login) values(1,'carlos','https://ict4kids.files.wordpress.com/2013/05/mrc-2.png','carlosnlg');
