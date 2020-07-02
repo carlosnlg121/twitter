@@ -1,9 +1,11 @@
 package com.totvs.financeiro.twitter.domain.user;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 @Entity
 @Table(name = "user")
@@ -14,6 +16,7 @@ public class User {
 	private Long id;
 	private String name;
 	private String avatar;
+	@Column(unique=true)
 	private String login;
 	
 	public Long getId() {
