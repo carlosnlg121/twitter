@@ -17,6 +17,7 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.UpdateTimestamp;
 
+import com.totvs.financeiro.twitter.domain.post.Post;
 import com.totvs.financeiro.twitter.domain.user.User;
 
 @Entity
@@ -37,4 +38,47 @@ public class Comments {
     @JoinColumn(name = "user_id", nullable = false, referencedColumnName = "id")
 	private User user;
 
+	@OneToOne
+    @JoinColumn(name = "post_id", nullable = false, referencedColumnName = "id")
+	private Post post;
+
+	public UUID getId() {
+		return id;
+	}
+
+	public void setId(UUID id) {
+		this.id = id;
+	}
+
+	public String getText() {
+		return text;
+	}
+
+	public void setText(String text) {
+		this.text = text;
+	}
+
+	public LocalDateTime getTime() {
+		return time;
+	}
+
+	public void setTime(LocalDateTime time) {
+		this.time = time;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public Post getPost() {
+		return post;
+	}
+
+	public void setPost(Post post) {
+		this.post = post;
+	}
 }
