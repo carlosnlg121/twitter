@@ -28,43 +28,31 @@ public class PostServiceImpl implements PostService {
 		this.userService = userService;
 	}
 	
-	@Override
-	public Post obter(Long id) {
-        return repository.findById(id)
-                .orElseThrow(() -> new NotFoundException(
-                        String.format("Twitter não encontrado com ID %s", id)));
-	}
-	
-	@Override
+    @Override
+    public Post get(@NonNull Long id) {
+        return repository.findById(id).orElseThrow(NotFoundException::new);
+    }
+
+    @Override
+    public Post save(@NonNull Post param) {
+        return repository.save(param);
+    }
+
+    @Override
+    public Iterable<Post> list() {
+        return repository.findAll();
+    }
+
+    @Override
     public Iterable<Post> findByUser(@NonNull Long id) {
         return repository.findByUserId(id);
     }
-	
-	@Override
-	public Iterable<Post> listar() {
-        return repository.findAll();
-                
-	}
-	
-	@Override
-    public Post alterar(@NonNull Post post) {
-        //validate(user);
-        Validate.notNull(post.getId(), "Dados da Live incompleto");
-        return repository.save(post);
-    }
-	
-	
-	@Override
-    public Post inserir(@NonNull Post post) {
-       // validate(user);
-        return Optional.ofNullable(repository.save(post)).get();
-    }
-	
-	@Override
+
+    @Override
     public void deleteByOwner(@NonNull Long id, @NonNull Long user) {
         final Post twitter = repository.findById(id)
                 .orElseThrow(() -> new BusinessException("Twitter não encontrado"));
-        final User owner = userService.obter(user);
+        final User owner = userService.find(user);
 
         if (owner.getId().equals(twitter.getUser().getId())) {
             repository.delete(twitter);

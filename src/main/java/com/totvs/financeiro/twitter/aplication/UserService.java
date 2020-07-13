@@ -8,5 +8,6 @@ public interface UserService {
 	User inserir(User user);
 	void deletar(Long id);
 	User alterar(User user);
+	User find(Long id);
 
 }

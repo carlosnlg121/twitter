@@ -27,15 +27,18 @@ public class PostResource {
 	@Autowired
 	private PostService service;
 	
+	@Autowired
+	private UserService userservice;
+	
 	@GetMapping
-	public Iterable<Post> listar(){
-		return service.listar();
+	public Iterable<Post> list(){
+		return service.list();
 		
 	}
 	
 	@GetMapping("/{id}")
 	public Post obter(@NonNull Long id){
-		return service.obter(id);
+		return service.get(id);
 		
 	}
 	
@@ -46,14 +49,9 @@ public class PostResource {
 	
 	@PostMapping
     public Post inserir(@RequestBody Post param) {
-        return service.inserir(param);
+        return service.save(param);
     }
 
-    @PutMapping
-    public Post alterar(@RequestBody Post param) {
-        return service.alterar(param);
-    }
-    
     @DeleteMapping("/{id}")
     public Map<String, String> deleteMy(@PathVariable Long id, @RequestHeader("user_id") Long userId) {
         service.deleteByOwner(id, userId);

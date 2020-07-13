@@ -10,6 +10,7 @@ import com.totvs.financeiro.twitter.domain.user.User;
 import com.totvs.financeiro.twitter.domain.user.UserRepository;
 import com.totvs.financeiro.twitter.infra.exception.NotFoundException;
 
+import java.util.Objects;
 import java.util.Optional;
 
 import org.apache.commons.lang3.StringUtils;
@@ -39,9 +40,16 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	@Override
+    public User find(@NonNull Long id) {
+        return repository.findById(id)
+                .orElseThrow(() -> new NotFoundException(
+                        String.format("User não encontrada com ID %s", id)));
+    }
+	
+	@Override
     public User inserir(@NonNull User user) {
-        validate(user);
-        return Optional.ofNullable(repository.save(user)).get();
+        validate(user);             
+        return Optional.ofNullable(repository.save(user)).get(); 
     }
 	
 	@Override
@@ -56,12 +64,17 @@ public class UserServiceImpl implements UserService {
         repository.deleteById(id);
     }
 	
-	private static void validate(User obj) {
+	private void validate(User obj) {
         Validate.notNull(obj, "Dados da usuario não informado");
         Validate.isTrue(StringUtils.isNotBlank(obj.getName()), "Nome do usuario não informado");
         Validate.notNull(obj.getLogin(), "Login do usuario não informado");
         Validate.notNull(obj.getAvatar(), "Avatar não informado");
-    }
-	
+        boolean validarUrl = (obj.getAvatar().contains("http")||obj.getAvatar().contains("HTTP")||obj.getAvatar().contains("WWW")||obj.getAvatar().contains("www"));
+        Validate.isTrue(validarUrl,"E obrigatorio ter um link para o avatar" );
+        User login = repository.findByLogin(obj.getLogin());
+        if (Objects.nonNull(login)) {
+        	Validate.validState(login.getLogin() == obj.getLogin(), "Login ja foi cadastrado" );
+        }
+    }	
 
 }

@@ -25,9 +25,8 @@ import com.totvs.financeiro.twitter.domain.user.User;
 public class Comments {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id", updatable = false, unique = true, nullable = false)
-	private UUID id; 
+	@GeneratedValue
+	private Long id;
 	
 	private String text;
 	
@@ -42,11 +41,11 @@ public class Comments {
     @JoinColumn(name = "post_id", nullable = false, referencedColumnName = "id")
 	private Post post;
 
-	public UUID getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(UUID id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

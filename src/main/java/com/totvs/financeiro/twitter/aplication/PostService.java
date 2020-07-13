@@ -5,15 +5,13 @@ import com.totvs.financeiro.twitter.domain.user.User;
 
 public interface PostService {
 
-	Post obter(Long id);
-
-	Iterable<Post> listar();
-
-	Post alterar(Post post);
-
-	Post inserir(Post post);
-
 	void deleteByOwner(Long id, Long user);
+	
+	Iterable<Post> list();
+
+	Post save(Post param);
+
+	Post get(Long id);
 
 	Iterable<Post> findByUser(Long id);
 

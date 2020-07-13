@@ -13,7 +13,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.totvs.financeiro.twitter.domain.comments.Comments;
@@ -25,30 +29,25 @@ import com.totvs.financeiro.twitter.domain.user.User;
 public class Post {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id", updatable = false, unique = true, nullable = false)
-	private UUID id;
-	
-	private String message;
-	
-	@ManyToOne
-    @JoinColumn(name = "user_id", nullable = false, referencedColumnName = "id")
-	private User user;
-	
+    @GeneratedValue
+    private Long id;
 	
 	@Column(nullable = false)
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
+	private String message;
+	
+	@OneToOne
+    private User user;
+	
+	
+	@CreationTimestamp
 	private LocalDateTime date;
 	
 	private String country;
 	
-	private Long comments;
-	private Long likes;
-	
-	public UUID getId() {
+	public Long getId() {
 		return id;
 	}
-	public void setId(UUID id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	public String getMessage() {
@@ -76,19 +75,6 @@ public class Post {
 	public void setCountry(String country) {
 		this.country = country;
 	}
-	public Long getComments() {
-		return comments;
-	}
-	public void setComments(Long comments) {
-		this.comments = comments;
-	}
-	public Long getLikes() {
-		return likes;
-	}
-	public void setLikes(Long likes) {
-		this.likes = likes;
-	}
-	
 	
 
 }

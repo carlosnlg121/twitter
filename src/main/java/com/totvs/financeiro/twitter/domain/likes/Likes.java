@@ -26,10 +26,9 @@ import com.totvs.financeiro.twitter.domain.user.User;
 @Table(name = "likes")
 public class Likes {
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id", updatable = false, unique = true, nullable = false)
-	private UUID id;
+	 @Id
+	 @GeneratedValue
+	 private Long id;
 	
 	@OneToOne
     @JoinColumn(name = "post_id", nullable = false, referencedColumnName = "id")
@@ -42,11 +41,11 @@ public class Likes {
     @JoinColumn(name = "user_id", nullable = false, referencedColumnName = "id")
 	private User user;
 
-	public UUID getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(UUID id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
