@@ -37,7 +37,7 @@ public class PostResource {
 	}
 	
 	@GetMapping("/{id}")
-	public Post obter(@NonNull Long id){
+	public Post obter(@NonNull @PathVariable Long id){
 		return service.get(id);
 		
 	}

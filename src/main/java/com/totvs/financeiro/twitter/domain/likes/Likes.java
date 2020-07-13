@@ -17,6 +17,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import com.totvs.financeiro.twitter.domain.post.Post;
@@ -31,14 +32,12 @@ public class Likes {
 	 private Long id;
 	
 	@OneToOne
-    @JoinColumn(name = "post_id", nullable = false, referencedColumnName = "id")
 	private Post post;
 	
-	@UpdateTimestamp
+	@CreationTimestamp
 	private LocalDateTime time;
 	
 	@OneToOne
-    @JoinColumn(name = "user_id", nullable = false, referencedColumnName = "id")
 	private User user;
 
 	public Long getId() {

@@ -8,10 +8,10 @@ public interface LikesService {
 
 	Iterable<Likes> listar();
 
-	Likes inserir(Likes likes);
+	Iterable<Likes> findByTwitter(Long id);
 
-	Likes alterar(Likes likes);
+	Likes inserir(Likes comments);
 
-	void deletar(Long id);
+	void deleteByOwner(Long id, Long user);
 
 }

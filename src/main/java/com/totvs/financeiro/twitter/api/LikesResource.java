@@ -1,45 +1,48 @@
 package com.totvs.financeiro.twitter.api;
 
+import java.util.Collections;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.totvs.financeiro.twitter.aplication.LikesService;
-import com.totvs.financeiro.twitter.aplication.PostService;
 import com.totvs.financeiro.twitter.domain.likes.Likes;
-import com.totvs.financeiro.twitter.domain.post.Post;
 
 @RestController
-@RequestMapping("like")
+@RequestMapping("likes")
 public class LikesResource {
 	
 	@Autowired
 	private LikesService service;
-	
-	@GetMapping
-	public Iterable<Likes> listar(){
-		return service.listar();
-		
-	}
-	
-	@GetMapping("/{id}")
-	public Likes obter(@NonNull Long id){
-		return service.obter(id);
-		
-	}	
-	
-	@PostMapping
-    public Likes inserir(@RequestBody Likes param) {
-        return service.inserir(param);
+
+    @GetMapping
+    public Iterable<Likes> list() {
+        return service.listar();
     }
 
-    @PutMapping
-    public Likes alterar(@RequestBody Likes param) {
-        return service.alterar(param);
+    @GetMapping("/twitters/{id}")
+    public Iterable<Likes> listByTwitter(@PathVariable Long id) {
+        return service.findByTwitter(id);
+    }
+
+    @PostMapping
+    public Likes save(@RequestBody Likes likes) {
+        return service.inserir(likes);
+    }
+
+    @DeleteMapping("/{id}")
+    public Map<String, String> deleteByOwner(@PathVariable Long id, @RequestHeader("user_id") Long userId) {
+        service.deleteByOwner(id, userId);
+        return Collections.singletonMap("msg", "Comentário deletado com sucesso");
     }
 }

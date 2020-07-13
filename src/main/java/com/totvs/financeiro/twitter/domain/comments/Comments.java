@@ -15,6 +15,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import com.totvs.financeiro.twitter.domain.post.Post;
@@ -30,15 +31,13 @@ public class Comments {
 	
 	private String text;
 	
-	@UpdateTimestamp
+	@CreationTimestamp
 	private LocalDateTime time;
 	
 	@OneToOne
-    @JoinColumn(name = "user_id", nullable = false, referencedColumnName = "id")
 	private User user;
 
 	@OneToOne
-    @JoinColumn(name = "post_id", nullable = false, referencedColumnName = "id")
 	private Post post;
 
 	public Long getId() {

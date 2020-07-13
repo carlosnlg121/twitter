@@ -17,7 +17,7 @@ import com.totvs.financeiro.twitter.aplication.CommentsService;
 import com.totvs.financeiro.twitter.domain.comments.Comments;
 
 @RestController
-@RequestMapping("comment")
+@RequestMapping("comments")
 public class CommentsResource {
 	
 	 @Autowired
