@@ -21,7 +21,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.totvs.financeiro.twitter.domain.comments.Comments;
-import com.totvs.financeiro.twitter.domain.likes.Likes;
+import com.totvs.financeiro.twitter.domain.likes.Curtidas;
 import com.totvs.financeiro.twitter.domain.user.User;
 
 @Entity

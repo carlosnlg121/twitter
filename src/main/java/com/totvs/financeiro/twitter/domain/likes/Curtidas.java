@@ -24,8 +24,8 @@ import com.totvs.financeiro.twitter.domain.post.Post;
 import com.totvs.financeiro.twitter.domain.user.User;
 
 @Entity
-@Table(name = "likes")
-public class Likes {
+@Table(name = "Curtidas")
+public class Curtidas {
 	
 	 @Id
 	 @GeneratedValue

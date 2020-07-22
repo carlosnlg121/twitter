@@ -1,9 +1,0 @@
-2020-07-13 18:00:03 jdbc[3]: exception
-org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "CREATE TABLE LIKE[*] (ID BIGINT NOT NULL, TIME TIMESTAMP, POST_ID BIGINT, USER_ID BIGINT, PRIMARY KEY (ID))"; expected "identifier"; SQL statement:
-create table like (id bigint not null, time timestamp, post_id bigint, user_id bigint, primary key (id)) [42001-200]
-2020-07-13 18:00:04 jdbc[3]: exception
-org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "ALTER TABLE LIKE[*] ADD CONSTRAINT FKJ35OSR3KH1HQYYTEIULF4EVO0 FOREIGN KEY (POST_ID) REFERENCES POST"; expected "identifier"; SQL statement:
-alter table like add constraint FKj35osr3kh1hqyyteiulf4evo0 foreign key (post_id) references post [42001-200]
-2020-07-13 18:00:04 jdbc[3]: exception
-org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "ALTER TABLE LIKE[*] ADD CONSTRAINT FK8OIGKSXPJDXGAS3G45U4BA88B FOREIGN KEY (USER_ID) REFERENCES USER"; expected "identifier"; SQL statement:
-alter table like add constraint FK8oigksxpjdxgas3g45u4ba88b foreign key (user_id) references user [42001-200]

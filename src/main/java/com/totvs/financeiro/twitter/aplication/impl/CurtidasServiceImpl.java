@@ -7,49 +7,50 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 
-import com.totvs.financeiro.twitter.aplication.LikesService;
+import com.totvs.financeiro.twitter.aplication.CurtidasService;
 import com.totvs.financeiro.twitter.aplication.UserService;
 import com.totvs.financeiro.twitter.domain.comments.Comments;
 import com.totvs.financeiro.twitter.domain.comments.CommentsRepository;
-import com.totvs.financeiro.twitter.domain.likes.Likes;
-import com.totvs.financeiro.twitter.domain.likes.LikesRepository;
+import com.totvs.financeiro.twitter.domain.likes.Curtidas;
+import com.totvs.financeiro.twitter.domain.likes.CurtidasRepository;
 import com.totvs.financeiro.twitter.domain.user.User;
+import com.totvs.financeiro.twitter.infra.Logger;
 import com.totvs.financeiro.twitter.infra.exception.BusinessException;
 import com.totvs.financeiro.twitter.infra.exception.NotFoundException;
 
 @Service
-public class LikesServiceImpl implements LikesService {
+public class CurtidasServiceImpl implements Logger, CurtidasService {
 	
-	private LikesRepository repository;
+	private CurtidasRepository repository;
 	private UserService userService;
 	
 	@Override
-	public Likes obter(Long id) {
+	public Curtidas obter(Long id) {
         return repository.findById(id)
                 .orElseThrow(() -> new NotFoundException(
                         String.format("Usuario não encontrado com ID %s", id)));
 	}
 	
 	@Override
-	public Iterable<Likes> listar() {
+	public Iterable<Curtidas> listar() {
+		log("buscando reg");
         return repository.findAll();
                 
 	}
 	
 	@Override
-    public Iterable<Likes> findByTwitter(@NonNull Long id) {
+    public Iterable<Curtidas> findByTwitter(@NonNull Long id) {
         return repository.findByPostId(id);
     }
 	
 	@Override
-    public Likes inserir(@NonNull Likes likes) {
-       // validate(comments);
+    public Curtidas inserir(@NonNull Curtidas likes) {
         return Optional.ofNullable(repository.save(likes)).get();
     }
 	
     @Override
     public void deleteByOwner(@NonNull Long id, @NonNull Long user) {
-        final Likes comment = repository.findById(id)
+        final Curtidas comment = repository.findById(id)
                 .orElseThrow(() -> new BusinessException("Comentário não encontrado"));
         final User owner = userService.obter(user);
 

@@ -15,28 +15,28 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.totvs.financeiro.twitter.aplication.LikesService;
-import com.totvs.financeiro.twitter.domain.likes.Likes;
+import com.totvs.financeiro.twitter.aplication.CurtidasService;
+import com.totvs.financeiro.twitter.domain.likes.Curtidas;
 
 @RestController
-@RequestMapping("likes")
-public class LikesResource {
+@RequestMapping("curtir")
+public class CurtidasResource {
 	
 	@Autowired
-	private LikesService service;
+	private CurtidasService service;
 
     @GetMapping
-    public Iterable<Likes> list() {
+    public Iterable<Curtidas> list() {
         return service.listar();
     }
 
     @GetMapping("/twitters/{id}")
-    public Iterable<Likes> listByTwitter(@PathVariable Long id) {
+    public Iterable<Curtidas> listByTwitter(@PathVariable Long id) {
         return service.findByTwitter(id);
     }
 
     @PostMapping
-    public Likes save(@RequestBody Likes likes) {
+    public Curtidas save(@RequestBody Curtidas likes) {
         return service.inserir(likes);
     }
 
