@@ -36,7 +36,7 @@ public class CurtidasResource {
     }
 
     @PostMapping
-    public Curtidas save(@RequestBody Curtidas likes) {
+    public String save(@RequestBody Curtidas likes) {
         return service.inserir(likes);
     }
 

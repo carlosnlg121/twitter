@@ -10,7 +10,7 @@ public interface CurtidasService {
 
 	Iterable<Curtidas> findByTwitter(Long id);
 
-	Curtidas inserir(Curtidas comments);
+	String inserir(Curtidas comments);
 
 	void deleteByOwner(Long id, Long user);
 
